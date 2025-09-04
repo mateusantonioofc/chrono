@@ -1,6 +1,7 @@
 package com.github.mateusantonioofc.chrono.controller;
 
 import com.github.mateusantonioofc.chrono.model.EmprestimosEntity;
+import com.github.mateusantonioofc.chrono.repository.EmprestimosRepository;
 import com.github.mateusantonioofc.chrono.service.EmprestimosService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,14 +13,14 @@ import java.util.List;
 @RequestMapping("/emprestimos")
 public class EmprestimosController {
 
-    private final EmprestimosService emprestimosService;
+    private final EmprestimosRepository emprestimosRepository;
 
-    public EmprestimosController(EmprestimosService emprestimosService) {
-        this.emprestimosService = emprestimosService;
+    public EmprestimosController(EmprestimosRepository emprestimosRepository) {
+        this.emprestimosRepository = emprestimosRepository;
     }
 
     @GetMapping
     public List<EmprestimosEntity> getAllEmprestimos() {
-        return emprestimosService.getAll();
+        return emprestimosRepository.findAll();
     }
 }
