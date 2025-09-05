@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/emprestimos")
@@ -20,6 +21,16 @@ public class EmprestimosController {
     @GetMapping
     public List<EmprestimosEntity> getAllEmprestimos() {
         return emprestimosRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getEmprestimoById(@PathVariable Long id) {
+        if(emprestimosRepository.existsById(id)) {
+            Optional<EmprestimosEntity> referenceById = emprestimosRepository.findById(id);
+            return ResponseEntity.ok(referenceById);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping
@@ -45,6 +56,7 @@ public class EmprestimosController {
                     emprestimo.setData(dados.getData());
                     emprestimo.setValor(dados.getValor());
                     emprestimo.setDescricao(dados.getDescricao());
+                    emprestimo.setDataPagamento(dados.getDataPagamento());
                     emprestimosRepository.save(emprestimo);
                     return ResponseEntity.ok().build();
                 })
