@@ -16,6 +16,7 @@ public class EmprestimosEntity {
     private LocalDate data;
     private BigDecimal valor;
     private String descricao;
+    private LocalDate dataPagamento;
 
     public EmprestimosEntity() {
     }
@@ -34,6 +35,14 @@ public class EmprestimosEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public LocalDate getDataPagamento() {
+        return dataPagamento;
+    }
+
+    public void setDataPagamento(LocalDate dataPagamento) {
+        this.dataPagamento = dataPagamento;
     }
 
     public String getNome() {
